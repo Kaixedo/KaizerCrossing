@@ -1,0 +1,18 @@
+language: c
+
+dist: xenial
+
+addons:
+  apt:
+    update: true
+    packages:
+      - luarocks
+      - lua-check
+
+install:
+  - eval $(luarocks path)
+  - luarocks install --local luaunit
+
+script:
+  - luacheck .
+  - lua test.lua
