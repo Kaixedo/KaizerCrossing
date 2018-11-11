@@ -1,0 +1,23 @@
+language: c
+
+dist: xenial
+
+addons:
+  apt:
+    update: true
+    packages:
+      - lua5.3
+      - liblua5.3-dev
+
+install:
+  - wget https://luarocks.org/releases/luarocks-3.0.4.tar.gz
+  - tar zxpf luarocks-3.0.4.tar.gz
+  - (cd luarocks-3.0.4 && ./configure && sudo make bootstrap)
+  - sudo rm -rf luarocks-3.0.4
+  - sudo luarocks install luaunit
+  - sudo luarocks install luacheck
+  - eval $(luarocks path --bin)
+
+script:
+  - luacheck --std +love .
+  - lua5.3 test.lua
