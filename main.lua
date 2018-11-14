@@ -58,7 +58,7 @@ function love.load()
 end
 
 function love.update(dt)
-  for car in pairs(EnemyCars) do
+  for _, car in pairs(EnemyCars) do
     car.x = car.x + car.speed * dt
     if car.x > car.endx or car.x < 0 then
       car.x = car.initialx
@@ -86,11 +86,11 @@ function love.draw()
   love.graphics.print(tonumber(Kaizer.y), 0, 20)
 
   love.graphics.draw(Kaizer.img, Kaizer.x, Kaizer.y)
-  for car in pairs(EnemyCars) do
+  for _, car in pairs(EnemyCars) do
     love.graphics.draw(car.img, car.x, car.y)
   end
 
-  for car in pairs(EnemyCars) do
+  for _, car in pairs(EnemyCars) do
     if collision(car.x, car.y, car.w, car.h, Kaizer.x, Kaizer.y, Kaizer.w, Kaizer.h) then
       love.graphics.print("COLLISION DETECTED", 0, 50)
     end
